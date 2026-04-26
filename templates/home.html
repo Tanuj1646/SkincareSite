@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero-section">
+  <div class="hero-copy">
+    <p class="eyebrow">Natural. Gentle. Radiant.</p>
+    <h1>Skincare designed for calm, luminous skin.</h1>
+    <p class="intro">Blush Skincare blends clean botanicals with soft textures for a ritual that feels effortless every morning and evening.</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href="{{ url_for('shop') }}">Shop Now</a>
+      <a class="button button-secondary" href="#featured">Learn More</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img src="{{ url_for('static', filename='images/hero.svg') }}" alt="Skincare products illustration" />
+  </div>
+</section>
+
+<section class="featured-section" id="featured">
+  <div class="section-heading">
+    <p class="eyebrow">Featured essentials</p>
+    <h2>Try our signature ritual favorites.</h2>
+  </div>
+  <div class="product-grid">
+    {% for item in featured %}
+    <article class="product-card">
+      <img src="{{ url_for('static', filename='images/' + item.image) }}" alt="{{ item.name }}" />
+      <div class="product-card-body">
+        <span class="product-category">{{ item.category }}</span>
+        <h3>{{ item.name }}</h3>
+        <p>{{ item.short }}</p>
+        <div class="product-card-actions">
+          <span class="price">₹{{ item.price }}</span>
+          <a class="button button-outline" href="{{ url_for('product_detail', product_id=item.id) }}">View Details</a>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

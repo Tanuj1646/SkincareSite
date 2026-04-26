@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="product-detail-page">
+  <div class="product-detail-media">
+    <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}" />
+  </div>
+  <div class="product-detail-copy">
+    <p class="eyebrow">{{ product.category }}</p>
+    <h1>{{ product.name }}</h1>
+    <p class="price-large">₹{{ product.price }}</p>
+    <p class="intro">{{ product.description }}</p>
+    <div class="product-meta">
+      <h3>Key ingredients</h3>
+      <ul>
+        {% for ingredient in product.ingredients %}
+        <li>{{ ingredient }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <a class="button button-primary" href="{{ url_for('add_to_cart', product_id=product.id) }}">Add to Cart</a>
+  </div>
+</section>
+{% endblock %}
